@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "AddToSession";
+}
+
+<h2>加入購物車</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>請輸入數量</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <input type="hidden" name="txtRoomID" value="@ViewBag.roomID" />
+        <div class="form-group">
+            @Html.TextBox("txtCount", 1, htmlAttributes: new { @class = "control-label col-md-2" })
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="確定" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("取消", "List")
+</div>

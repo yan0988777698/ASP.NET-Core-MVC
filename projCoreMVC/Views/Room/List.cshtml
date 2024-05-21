@@ -1,0 +1,75 @@
+﻿@model IEnumerable<projCoreMVC.Models.TRoom>
+
+@{
+    ViewData["Title"] = "List";
+}
+
+<h1>訂房系統</h1>
+<form method="post">
+    <input type="text" name="Keyword" />
+    <input type="submit" value="尋找" />
+</form>
+<p>
+    <a asp-action="Create">新增房間</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                序號
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FImagePath)
+            </th>
+            <th>照片</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int count = 0;
+            foreach (var item in Model)
+            {
+                count++;
+                <tr>
+                    <td>
+                        @count
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FAmount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FDescription)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FImagePath)
+                    </td>
+                    <td>
+                        <img src="~/Images/@item.FImagePath" width="250" height="200">
+                    </td>
+                    <td>
+                        @Html.ActionLink("編輯", "Edit", new { id=item.Fid  },null) |
+                        @Html.ActionLink("刪除", "Delete", new { id=item.Fid },new{onclick = "return confirm('確定要刪除?')"})
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

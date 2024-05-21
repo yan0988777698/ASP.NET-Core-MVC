@@ -1,0 +1,65 @@
+﻿@model IEnumerable<projCoreMVC.Models.TRoom>
+
+@{
+    ViewData["Title"] = "List";
+}
+
+<h1>線上訂房</h1>
+
+<p>
+    <a asp-action="CartView">檢視購物車</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>序號</th>
+            <th>
+                @Html.DisplayNameFor(model => model.FName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FImagePath)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int count = 0;
+            foreach (var item in Model)
+            {
+                count++;
+                <tr>
+                    <td>
+                        @count
+                    </td>
+                    <td>
+                        <img src="~/Images/@item.FImagePath" width="320" height="280" /><br />
+                        @Html.DisplayFor(modelItem => item.FName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FAmount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FDescription)
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("加入購物車", "AddToCart","Shopping", new {  id=item.Fid },null)
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

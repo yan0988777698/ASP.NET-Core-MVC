@@ -1,0 +1,63 @@
+﻿@model IEnumerable<projCoreMVC.Models.CShoppingCartItem>
+
+@{
+    ViewData["Title"] = "CartView";
+}
+
+<h1>檢視購物車</h1>
+
+<p>
+    <a asp-action="Create">結帳</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                序號
+            </th>
+            <th>
+                房名
+            </th>
+            <th>
+                注意事項
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.count)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int count = 0;
+            foreach (var item in Model)
+            {
+                count++;
+                <tr>
+                    <td>
+                        @count
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.room.FName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.room.FDescription)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.count)
+                    </td>
+                    <td>
+                        @Html.ActionLink("更改數量", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("取消", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

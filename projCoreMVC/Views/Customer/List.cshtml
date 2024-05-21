@@ -1,0 +1,73 @@
+﻿@model IEnumerable<projCoreMVC.Models.TCustomer>
+
+@{
+    ViewData["Title"] = "List";
+}
+
+<h1>客戶清單</h1>
+<form method="post" >
+    <input type="text" name="Keyword" />
+    <input type="submit" value="尋找" />
+</form>
+
+<p>
+    <a asp-action="Create">新增會員</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                序號
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Femail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Faddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fphone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fpassword)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int count = 0;
+            foreach (var item in Model)
+            {
+                count++;
+                <tr>
+                    <td>
+                        @count
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Femail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Faddress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fphone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fpassword)
+                    </td>
+                    <td>
+                        @Html.ActionLink("修改", "Edit", new { id=item.Fid },null) |
+                        @Html.ActionLink("刪除", "Delete", new {  id=item.Fid },new{ onclick = "return confirm('確定刪除?')"})
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
